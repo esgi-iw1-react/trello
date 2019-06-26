@@ -56,3 +56,13 @@ export function editTitle(title, card) {
     }
   }
 }
+
+export function addLabel(label, card) {
+  return {
+    type: 'ADD_LABEL',
+    payload: {
+      label,
+      card
+    }
+  }
+}

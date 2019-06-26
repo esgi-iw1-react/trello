@@ -5,12 +5,12 @@ import CardSubtitle from "./CardSubtitle";
 import CardCommentItem from "./CardCommmentItem";
 import CardDescription from "./CardDescription";
 import CardTitle from "./CardTitle";
+import CardAddBtn from "./CardAddBtn";
 
 class Card extends React.Component {
   
   render() {
-    const {card, addComment, editDescription, editTitle} = this.props;
-    // console.log(card);debugger;
+    const {card, addComment, editDescription, editTitle, addLabel} = this.props;
     return <>
       <div className="bg-gray-100 w-1/2 mx-auto mt-16 shadow p-6">
         <CardTitle title={card.title} card={card} onSubmit={editTitle}/>
@@ -25,6 +25,7 @@ class Card extends React.Component {
               {
                 card.labels.map((label, index) => <Label key={index} text={label.name} color={label.color} />)
               }
+              <CardAddBtn click={addLabel} card={card} />
             </div>
           </div>
         </div>

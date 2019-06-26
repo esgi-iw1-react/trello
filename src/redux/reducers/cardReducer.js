@@ -43,6 +43,19 @@ const cardReducer = (state = { cards : [] }, action) => {
           return c
         })
       };
+    case "ADD_LABEL":
+      return {
+        ...state,
+        cards: state.cards.map(c => {
+          if(c.id === action.payload.card.id){
+            return {
+              ...c,
+              labels : [...c.labels, action.payload.label]
+            }
+          }
+          return c
+        })
+      };
     default:
       return state;
   }
