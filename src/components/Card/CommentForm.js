@@ -1,10 +1,11 @@
 import React from 'react'
+import CardSubmitBtn from "./CardSubmitBtn";
 
 class CommentForm extends React.Component {
   
   constructor(props){
     super(props);
-    this.state = { text: 'allo ' }
+    this.state = { text: '' }
   }
   
   handleChange = (e) => {
@@ -16,17 +17,18 @@ class CommentForm extends React.Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.text, this.props.card);
     this.setState({text: ""});
+    this.props.onSubmit(this.state.text, this.props.card);
   };
   
   render() {
     return <form onSubmit={this.handleSubmit}>
-      <textarea className="w-full p-2 h-32" name="comment" placeholder="Ecrivez un commentaire" onChange={this.handleChange}>
+      <textarea className="w-full p-2 h-32" name="comment"
+                placeholder="Ecrivez un commentaire"
+                onChange={this.handleChange}
+                value={this.state.text}>
       </textarea>
-      <button className="text-white rounded bg-green-500 font-bold text-sm p-2 mt-2" type="submit">
-        Enregistrer
-      </button>
+      <CardSubmitBtn/>
     </form>
   }
   

@@ -4,14 +4,16 @@ import CommentForm from "./CommentForm";
 import CardSubtitle from "./CardSubtitle";
 import CardCommentItem from "./CardCommmentItem";
 import CardDescription from "./CardDescription";
+import CardTitle from "./CardTitle";
 
 class Card extends React.Component {
   
   render() {
-    const {card, addComment, editDescription} = this.props;
+    const {card, addComment, editDescription, editTitle} = this.props;
+    // console.log(card);debugger;
     return <>
       <div className="bg-gray-100 w-1/2 mx-auto mt-16 shadow p-6">
-        <h1 className="font-bold text-gray-900 text-sm text-xl mb-3">{card.title}</h1>
+        <CardTitle title={card.title} card={card} onSubmit={editTitle}/>
         <div className="flex">
           <div className="flex flex-col justify-center mb-3 mr-6">
             <p className="text-sm text-gray-700 mb-2">Membres</p>

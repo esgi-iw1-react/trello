@@ -1,12 +1,12 @@
 import React from 'react'
 import CardSubmitBtn from "./CardSubmitBtn";
 
-class CardDescription extends React.Component {
+class CardTitle extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      text : props.description,
+      text : props.title,
       edit : false
     }
   }
@@ -34,17 +34,16 @@ class CardDescription extends React.Component {
   };
   
   render() {
-    if(this.props.description !== "" && !this.state.edit){
-      return <p className="py-1 text-gray-700 text-sm" onClick={this.toggleEdit}>{this.props.description}</p>
+    if(this.props.title !== "" && !this.state.edit){
+      return <h1 className="font-bold text-gray-900 text-sm text-xl mb-3" onClick={this.toggleEdit}>{this.props.title}</h1>
     } else {
       return <form onSubmit={this.handleSubmit}>
-        <textarea className="w-full p-2 h-32"
-                  placeholder="Ajoutez une description"
+        <input type="text" className="w-full p-2"
+                  placeholder="Ajoutez un titre"
                   onChange={this.handleChange}
                   value={this.state.text}
         >
-        </textarea>
-        <CardSubmitBtn/>
+        </input>
       </form>
     }
     
@@ -53,4 +52,4 @@ class CardDescription extends React.Component {
   
 }
 
-export default CardDescription;
+export default CardTitle;

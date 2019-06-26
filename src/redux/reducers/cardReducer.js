@@ -30,6 +30,19 @@ const cardReducer = (state = { cards : [] }, action) => {
           return c
         })
       };
+    case "EDIT_TITLE":
+      return {
+        ...state,
+        cards: state.cards.map(c => {
+          if(c.id === action.payload.card.id){
+            return {
+              ...c,
+              title : action.payload.title
+            }
+          }
+          return c
+        })
+      };
     default:
       return state;
   }

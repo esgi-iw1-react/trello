@@ -46,3 +46,13 @@ export function editDescription(description, card) {
     }
   }
 }
+
+export function editTitle(title, card) {
+  return {
+    type: 'EDIT_TITLE',
+    payload: {
+      title,
+      card
+    }
+  }
+}
