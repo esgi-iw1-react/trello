@@ -17,6 +17,19 @@ const cardReducer = (state = { cards : [] }, action) => {
           return c;
         })
       };
+    case "EDIT_DESCRIPTION":
+      return {
+        ...state,
+        cards: state.cards.map(c => {
+          if(c.id === action.payload.card.id){
+            return {
+              ...c,
+              description : action.payload.description
+            }
+          }
+          return c
+        })
+      };
     default:
       return state;
   }

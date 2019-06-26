@@ -36,3 +36,13 @@ export function addComment(comment, card) {
     }
   }
 }
+
+export function editDescription(description, card) {
+  return {
+    type: 'EDIT_DESCRIPTION',
+    payload: {
+      description,
+      card
+    }
+  }
+}
