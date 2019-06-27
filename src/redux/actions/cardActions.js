@@ -66,3 +66,13 @@ export function addLabel(label, card) {
     }
   }
 }
+
+export function removeLabel(label, card) {
+  return {
+    type: 'REMOVE_LABEL',
+    payload: {
+      label,
+      card
+    }
+  }
+}

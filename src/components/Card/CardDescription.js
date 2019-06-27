@@ -14,7 +14,7 @@ class CardDescription extends React.Component {
   handleChange = (e) => {
     const value = e.target.value;
     this.setState({
-      text: value
+      name: value
     });
   };
   
@@ -23,7 +23,7 @@ class CardDescription extends React.Component {
     this.setState({
       edit: false
     });
-    this.props.onSubmit(this.state.text, this.props.card);
+    this.props.onSubmit(this.state.name, this.props.card);
   };
   
   toggleEdit = (e) => {
@@ -41,7 +41,7 @@ class CardDescription extends React.Component {
         <textarea className="w-full p-2 h-32"
                   placeholder="Ajoutez une description"
                   onChange={this.handleChange}
-                  value={this.state.text}
+                  value={this.state.name}
         >
         </textarea>
         <CardSubmitBtn/>

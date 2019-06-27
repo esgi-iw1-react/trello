@@ -13,7 +13,7 @@ class CardTitle extends React.Component {
   handleChange = (e) => {
     const value = e.target.value;
     this.setState({
-      text: value
+      name: value
     });
   };
   
@@ -22,7 +22,7 @@ class CardTitle extends React.Component {
     this.setState({
       edit: false
     });
-    this.props.onSubmit(this.state.text, this.props.card);
+    this.props.onSubmit(this.state.name, this.props.card);
   };
   
   toggleEdit = (e) => {
@@ -40,7 +40,7 @@ class CardTitle extends React.Component {
         <input type="text" className="w-full p-2"
                   placeholder="Ajoutez un titre"
                   onChange={this.handleChange}
-                  value={this.state.text}
+                  value={this.state.name}
         >
         </input>
       </form>

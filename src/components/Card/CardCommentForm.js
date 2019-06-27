@@ -1,7 +1,7 @@
 import React from 'react'
 import CardSubmitBtn from "./CardSubmitBtn";
 
-class CommentForm extends React.Component {
+class CardCommentForm extends React.Component {
   
   constructor(props){
     super(props);
@@ -11,14 +11,14 @@ class CommentForm extends React.Component {
   handleChange = (e) => {
     const value = e.target.value;
     this.setState({
-      text: value
+      name: value
     });
   };
   
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({text: ""});
-    this.props.onSubmit(this.state.text, this.props.card);
+    this.setState({name: ""});
+    this.props.onSubmit(this.state.name, this.props.card);
   };
   
   render() {
@@ -26,7 +26,7 @@ class CommentForm extends React.Component {
       <textarea className="w-full p-2 h-32" name="comment"
                 placeholder="Ecrivez un commentaire"
                 onChange={this.handleChange}
-                value={this.state.text}>
+                value={this.state.name}>
       </textarea>
       <CardSubmitBtn/>
     </form>
@@ -34,4 +34,4 @@ class CommentForm extends React.Component {
   
 }
 
-export default CommentForm;
+export default CardCommentForm;
