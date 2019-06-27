@@ -28,6 +28,7 @@ class CardDescription extends React.Component {
   
   toggleEdit = (e) => {
     e.preventDefault();
+    console.log("TOGGLE");
     this.setState({
       edit: true
     })

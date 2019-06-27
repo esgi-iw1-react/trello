@@ -76,3 +76,13 @@ export function removeLabel(label, card) {
     }
   }
 }
+
+export function editLabel(label, card) {
+  return {
+    type: 'EDIT_LABEL',
+    payload: {
+      label,
+      card
+    }
+  }
+}

@@ -44,9 +44,6 @@ const cardReducer = (state = { cards : [] }, action) => {
         })
       };
     case "ADD_LABEL":
-      // console.log(action.payload.label);
-      // console.log(state.cards);
-      // debugger;
       return {
         ...state,
         cards: state.cards.map(c => {
@@ -67,6 +64,24 @@ const cardReducer = (state = { cards : [] }, action) => {
             return {
               ...c,
               labels: [...c.labels].filter(label => label.name !== action.payload.label.name)
+            };
+          }
+          return c
+        })
+      };
+    case "EDIT_LABEL":
+      return {
+        ...state,
+        cards: state.cards.map((c) => {
+          if (c.id === action.payload.card.id) {
+            return {
+              ...c,
+              labels: [...c.labels].map( (label) => {
+                if(label.color === action.payload.label.color){
+                  label.name = action.payload.label.name;
+                }
+                return label;
+              })
             };
           }
           return c
