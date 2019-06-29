@@ -15,9 +15,9 @@ const Label = (props) => {
     setSelected(!selected);
     const label = { name, selected, color };
     if(!selected){
-      context.addLabel(label, props.card)
+      context.addLabel(label, props.card, props.list)
     } else {
-      context.removeLabel(label, props.card)
+      context.removeLabel(label, props.card, props.list)
     }
   };
   
@@ -34,7 +34,7 @@ const Label = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEdit(!edit);
-    context.editLabel({ name, selected, color }, props.card);
+    context.editLabel({ name, selected, color }, props.card, props.list);
   };
   
   return <div className="flex items-center">

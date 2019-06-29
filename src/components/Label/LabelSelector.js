@@ -19,7 +19,7 @@ const LabelSelector = (props) =>{
         {
           labels.map( (label, index) => { return <Label key={index} name={label.name}
                                                         color={label.color} selected={label.selected}
-                                                        card={props.card}
+                                                        card={props.card} list={props.list}
           /> })
         }
       </div>

@@ -72,73 +72,119 @@ class CardProvider extends Component {
         })
       })
     },
-    editDescription: (description, card) => {
+    editDescription: (description, card, list) => {
       this.setState({
-          cards: this.state.cards.map(c => {
-            if(c.id === card.id){
-              return {
-                ...c,
-                description : description
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if(c.id === card.id){
+                const newCard = { ...c, description: description };
+                newCards.push(newCard);
+                return newCard
               }
-            }
-            return c
-          })
-      })
-    },
-    editTitle: (title, card) => {
-      this.setState({
-        cards: this.state.cards.map(c => {
-          if(c.id === card.id){
-            return {
-              ...c,
-              title : title
-            }
+              return c
+            });
+            return { ...l, cards: newCards };
           }
-          return c
+          return l;
         })
       })
     },
-    addLabel: (label, card) => {
+    editTitle: (title, card, list) => {
       this.setState({
-        cards: this.state.cards.map(c => {
-          if(c.id === card.id){
-            return {
-              ...c,
-              labels : [...c.labels, label]
-            }
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if(c.id === card.id){
+                const newCard = { ...c, title: title };
+                newCards.push(newCard);
+                return newCard
+              }
+              return c
+            });
+            return { ...l, cards: newCards };
           }
-          return c
+          return l;
         })
       })
     },
-    removeLabel: (label, card) => {
+    addLabel: (label, card, list) => {
       this.setState({
-        cards: this.state.cards.map((c) => {
-          if (c.id === card.id) {
-            return {
-              ...c,
-              labels: [...c.labels].filter(l => l.color !== label.color)
-            };
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if(c.id === card.id){
+                const newCard = { ...c, labels: [...c.labels, label] };
+                newCards.push(newCard);
+                return newCard
+              }
+              return c
+            });
+            return { ...l, cards: newCards };
           }
-          return c
+          return l;
         })
       })
     },
-    editLabel: (label, card) => {
+    removeLabel: (label, card, list) => {
       this.setState({
-        cards: this.state.cards.map((c) => {
-          if (c.id === card.id) {
-            return {
-              ...c,
-              labels: [...c.labels].map( (l) => {
-                if(l.color === label.color){
-                  l.name = label.name;
-                }
-                return l;
-              })
-            };
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if(c.id === card.id){
+                const newCard = { ...c, labels: [...c.labels].filter(l => l.color !== label.color)};
+                newCards.push(newCard);
+                return newCard
+              }
+              return c
+            });
+            return { ...l, cards: newCards };
           }
-          return c
+          return l;
+        })
+      })
+    },
+    editLabel: (label, card, list) => {
+      // this.setState({
+      //   cards: this.state.cards.map((c) => {
+      //     if (c.id === card.id) {
+      //       return {
+      //         ...c,
+      //         labels: [...c.labels].map( (l) => {
+      //           if(l.color === label.color){
+      //             l.name = label.name;
+      //           }
+      //           return l;
+      //         })
+      //       };
+      //     }
+      //     return c
+      //   })
+      // })
+      this.setState({
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if(c.id === card.id){
+                const newCard = { ...c, labels: [...c.labels].map( lab => {
+                  if(lab.color === label.color){
+                    lab.name = label.name
+                  }
+                  return lab;
+                })};
+                newCards.push(newCard);
+                return newCard
+              }
+              return c
+            });
+            return { ...l, cards: newCards };
+          }
+          return l;
         })
       })
     }

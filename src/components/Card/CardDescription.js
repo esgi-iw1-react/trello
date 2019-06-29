@@ -16,7 +16,7 @@ const CardDescription = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEdit(false);
-    context.editDescription(description, props.card);
+    context.editDescription(description, props.card, props.list);
   };
   
   const toggleEdit = (e) => {
