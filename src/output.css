@@ -79,7 +79,7 @@ a {
 
 /**
  * 1. Remove the bottom border in Chrome 57-
- * 2. Add the correct name decoration in Chrome, Edge, IE, Opera, and Safari.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 
 abbr[title] {
@@ -180,8 +180,8 @@ input { /* 1 */
 }
 
 /**
- * Remove the inheritance of name transform in Edge, Firefox, and IE.
- * 1. Remove the inheritance of name transform in Firefox.
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
  */
 
 button,
@@ -232,7 +232,7 @@ fieldset {
 }
 
 /**
- * 1. Correct the name wrapping in Edge and IE.
+ * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
  * 3. Remove the padding so developers are not caught out when they zero out
  *    `fieldset` elements in all browsers.
@@ -7969,9 +7969,36 @@ video {
   z-index: auto;
 }
 
+body, html {
+  height: 100%;
+}
+
 * {
   font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
+}
+
+.backdrop {
+  position: fixed;
+  background: #000000a3;
+  min-width: 100%;
+  min-height: 100%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+}
+
+.modal {
+  position: relative;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+  background-color: #f7fafc;
+  width: 48rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 2.5rem;
 }
 
 @media (min-width: 640px) {

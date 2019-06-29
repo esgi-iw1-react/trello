@@ -4,7 +4,29 @@
 
 @tailwind utilities;
 
+body, html {
+    height: 100%;
+}
 * {
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
+}
+
+.backdrop {
+    position: fixed;
+    background: #000000a3;
+    min-width: 100%;
+    min-height: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+}
+
+.modal {
+    position: relative;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    @apply bg-gray-100 w-192 shadow p-10;
 }
