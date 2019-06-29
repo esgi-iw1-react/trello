@@ -13,7 +13,7 @@ const CardListContainer = () => {
     ref.current = true;
   }, []);
   
-  return <div className="h-full h-screen">
+  return <div className="h-full h-screen flex">
     {
       context.lists.map((list, index) => <CardList key={index} list={list}/>)
     }
