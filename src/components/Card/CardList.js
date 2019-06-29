@@ -8,7 +8,7 @@ const CardList = (props) => {
           <p className="font-bold uppercase text-blue-700 mb-4">{name}</p>
           <Router>
             {
-              cards.map( (card, index) => <CardPreview key={index} card={card}/>)
+              cards.map( (card, index) => <CardPreview key={index} card={card} list={props.list}/>)
             }
           </Router>
     </div>

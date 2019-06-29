@@ -12,12 +12,12 @@ import {Link} from "react-router-dom";
 class Card extends React.Component {
   
   render() {
-    const {card} = this.props;
+    const {card, list} = this.props;
     return <>
       <div className="backdrop">
         <div className="modal">
           <div className="flex justify-between items-center mb-4">
-            <CardTitle title={card.title} card={card}/>
+            <CardTitle title={card.title} card={card} list={list}/>
             <Link to={"/"}>
               <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"/><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/></g></g></svg>
             </Link>
@@ -40,11 +40,11 @@ class Card extends React.Component {
               </div>
               <div className="mb-4">
                 <CardSubtitle name="Descriptions"/>
-                <CardDescription description={card.description} card={card} />
+                <CardDescription description={card.description} card={card} list={list}/>
               </div>
               <div>
                 <CardSubtitle name="Ajouter un commentaire"/>
-                <CardCommentForm card={card}/>
+                <CardCommentForm card={card} list={list}/>
               </div>
               <div className="mt-4">
                 <CardSubtitle name="Commentaires"/>
@@ -55,7 +55,7 @@ class Card extends React.Component {
             </div>
             <div className="w-1/4 flex flex-col items-end">
               <CardAddBtn name="Membres"/>
-              <CardAddBtn name="Labels"><LabelSelector card={card}/></CardAddBtn>
+              <CardAddBtn name="Labels"><LabelSelector card={card} list={list}/></CardAddBtn>
               <CardAddBtn name="CheckList"/>
               {/*<CardAddBtn click={addLabel} card={card} name="Date Limite"/>*/}
             </div>

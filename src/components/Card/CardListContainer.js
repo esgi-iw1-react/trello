@@ -9,13 +9,14 @@ const CardListContainer = () => {
   
   useEffect( () => {
     context.fetchLists();
-    // console.log(context);debugger;
     ref.current = true;
   }, []);
   
   return <div className="h-full h-screen flex">
     {
-      context.lists.map((list, index) => <CardList key={index} list={list}/>)
+      context.lists.map((list, index) => {
+        return <CardList key={index} list={list}/>
+      })
     }
   </div>
   

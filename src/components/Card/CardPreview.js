@@ -3,7 +3,7 @@ import LabelSmall from "../Label/LabelSmall";
 import { Route, Link } from "react-router-dom";
 import Card from "./Card";
 
-const CardPreview = ({ card }) => {
+const CardPreview = ({ card, list }) => {
   
   return <>
     <Link to={"/card/"+card.id}>
@@ -16,7 +16,7 @@ const CardPreview = ({ card }) => {
         <p className="text-gray-700 font-semibold">{card.title}</p>
       </div>
     </Link>
-    <Route path={"/card/"+card.id} render={(props) => <Card {...props} card={card} />}/>
+    <Route path={"/card/"+card.id} render={(props) => <Card {...props} card={card} list={list} />}/>
   </>
   
 };

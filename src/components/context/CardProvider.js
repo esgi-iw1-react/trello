@@ -52,16 +52,23 @@ class CardProvider extends Component {
         ]
       });
     },
-    addComment: (comment, card) => {
+    addComment: (comment, card, list) => {
       this.setState({
-        cards: this.state.cards.map(c => {
-          if (c.id === card.id) {
-            return {
-              ...c,
-              comments: [...c.comments, comment]
-            }
+        lists: this.state.lists.map(l => {
+          const newCards = [];
+          if(l.id === list.id){
+            l.cards.map(c => {
+              if (c.id === card.id) {
+                let updatedCard = { ...c, comments: [...c.comments, comment] };
+                newCards.push(updatedCard);
+                return updatedCard;
+              }
+              newCards.push(c);
+              return c;
+            });
+            return { ...l, cards: newCards};
           }
-          return c;
+          return l;
         })
       })
     },
