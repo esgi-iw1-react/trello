@@ -1,57 +1,44 @@
-import React from 'react'
+import React, {useState, useContext} from 'react'
 import CardSubmitBtn from "./CardSubmitBtn";
+import CardContext from "../context/CardContext";
 
-class CardDescription extends React.Component {
+const CardDescription = (props) => {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      text : props.description,
-      edit : false
-    }
+  const [description, setDescription] = useState(props.description);
+  const [edit, setEdit] = useState(false);
+  const context = useContext(CardContext);
+  
+  const handleChange = (e) => {
+    setEdit(true);
+    setDescription(e.target.value);
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEdit(false);
+    context.editDescription(description, props.card);
+  };
+  
+  const toggleEdit = (e) => {
+    e.preventDefault();
+    setEdit(true);
+  };
+  
+  
+  if(description !== "" && !edit){
+    return <p className="py-1 text-gray-700 text-sm" onClick={toggleEdit}>{description}</p>
+  } else {
+    return <form onSubmit={handleSubmit}>
+      <textarea className="w-full p-2 h-32"
+                placeholder="Ajoutez une description"
+                onChange={handleChange}
+                value={description}
+      >
+      </textarea>
+      <CardSubmitBtn/>
+    </form>
   }
   
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({
-      name: value
-    });
-  };
-  
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      edit: false
-    });
-    this.props.onSubmit(this.state.name, this.props.card);
-  };
-  
-  toggleEdit = (e) => {
-    e.preventDefault();
-    console.log("TOGGLE");
-    this.setState({
-      edit: true
-    })
-  };
-  
-  render() {
-    if(this.props.description !== "" && !this.state.edit){
-      return <p className="py-1 text-gray-700 text-sm" onClick={this.toggleEdit}>{this.props.description}</p>
-    } else {
-      return <form onSubmit={this.handleSubmit}>
-        <textarea className="w-full p-2 h-32"
-                  placeholder="Ajoutez une description"
-                  onChange={this.handleChange}
-                  value={this.state.name}
-        >
-        </textarea>
-        <CardSubmitBtn/>
-      </form>
-    }
-    
-  }
-  
-  
-}
+};
 
 export default CardDescription;

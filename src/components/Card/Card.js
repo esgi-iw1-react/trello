@@ -11,10 +11,10 @@ import LabelSelector from "../Label/LabelSelector";
 class Card extends React.Component {
   
   render() {
-    const {card, addComment, editDescription, editTitle} = this.props;
+    const {card, addComment} = this.props;
     return <>
       <div className="bg-gray-100 w-192 mx-auto mt-16 shadow p-10">
-        <CardTitle title={card.title} card={card} onSubmit={editTitle}/>
+        <CardTitle title={card.title} card={card}/>
         <div className="flex">
           <div className="w-3/4">
             <div className="flex">
@@ -33,7 +33,7 @@ class Card extends React.Component {
             </div>
             <div className="mb-4">
               <CardSubtitle name="Descriptions"/>
-              <CardDescription onSubmit={editDescription} description={card.description} card={card} />
+              <CardDescription description={card.description} card={card} />
             </div>
             <div>
               <CardSubtitle name="Ajouter un commentaire"/>

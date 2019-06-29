@@ -1,54 +1,40 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import CardContext from "../context/CardContext";
 
-class CardTitle extends React.Component {
+const CardTitle = (props) => {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      text : props.title,
-      edit : false
-    }
+  const [title, setTitle] = useState(props.title);
+  const [edit, setEdit] = useState(false);
+  const context = useContext(CardContext);
+  
+  const handleChange = (e) => {
+    setTitle(e.target.value);
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEdit(false);
+    context.editTitle(title, props.card);
+  };
+  
+  const toggleEdit = (e) => {
+    e.preventDefault();
+    setEdit(true);
+  };
+  
+  if(title !== "" && !edit){
+    return <h1 className="font-bold text-gray-900 text-sm text-xl mb-3" onClick={toggleEdit}>{title}</h1>
+  } else {
+    return <form onSubmit={handleSubmit}>
+      <input type="text" className="w-full p-2"
+                placeholder="Ajoutez un titre"
+                onChange={handleChange}
+                value={title}
+      >
+      </input>
+    </form>
   }
   
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({
-      name: value
-    });
-  };
-  
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      edit: false
-    });
-    this.props.onSubmit(this.state.name, this.props.card);
-  };
-  
-  toggleEdit = (e) => {
-    e.preventDefault();
-    this.setState({
-      edit: true
-    })
-  };
-  
-  render() {
-    if(this.props.title !== "" && !this.state.edit){
-      return <h1 className="font-bold text-gray-900 text-sm text-xl mb-3" onClick={this.toggleEdit}>{this.props.title}</h1>
-    } else {
-      return <form onSubmit={this.handleSubmit}>
-        <input type="text" className="w-full p-2"
-                  placeholder="Ajoutez un titre"
-                  onChange={this.handleChange}
-                  value={this.state.name}
-        >
-        </input>
-      </form>
-    }
-    
-  }
-  
-  
-}
+};
 
 export default CardTitle;

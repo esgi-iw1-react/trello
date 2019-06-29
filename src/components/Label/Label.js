@@ -26,7 +26,7 @@ class Label extends React.Component {
   toggleEdit = (e) => {
     e.preventDefault();
     this.setState({
-      edit: true
+      edit: !this.state.edit
     })
   };
   
@@ -35,7 +35,14 @@ class Label extends React.Component {
     this.setState({
       name: e.target.value
     });
-    this.props.editLabel(this.state, this.props.card)
+  };
+  
+  submit = (e) => {
+    e.preventDefault();
+    this.setState({
+      edit: !this.state.edit
+    });
+    this.props.editLabel(this.state, this.props.card);
   };
   
   
@@ -44,11 +51,12 @@ class Label extends React.Component {
   render() {
     return <div className="flex items-center">
           {this.state.edit ?
-            <>
+          <form onSubmit={this.submit}>
             <input className="text-gray-900 z-20 w-full" type="text" value={this.state.name} onChange={this.edit}/>
-            // TODO add method to checkmark
-            <svg xmlns="http://www.w3.org/2000/svg" fill="black" height="20" width="20" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="checkmark"><rect width="24" height="24" opacity="0"/><path d="M9.86 18a1 1 0 0 1-.73-.32l-4.86-5.17a1 1 0 1 1 1.46-1.37l4.12 4.39 8.41-9.2a1 1 0 1 1 1.48 1.34l-9.14 10a1 1 0 0 1-.73.33z"/></g></g></svg>
-            </>
+            <label for="submit">
+              <input type="submit" className="hidden" id="submit"/>
+            </label>
+          </form>
               :
             <>
           <div onClick={this.check} className={this.props.color + " px-2 py-1 font-semibold rounded text-white my-2 mr-2 text-sm flex justify-between w-full"}>
