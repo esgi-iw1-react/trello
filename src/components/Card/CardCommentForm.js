@@ -1,37 +1,31 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import CardSubmitBtn from "./CardSubmitBtn";
+import CardContext from "../context/CardContext";
 
-class CardCommentForm extends React.Component {
+const CardCommentForm = (props) => {
   
-  constructor(props){
-    super(props);
-    this.state = { text: '' }
-  }
+  const [comment, setComment] = useState('');
+  const context = useContext(CardContext);
   
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({
-      name: value
-    });
+  const handleChange = (e) => {
+    setComment(e.target.value);
   };
   
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({name: ""});
-    this.props.onSubmit(this.state.name, this.props.card);
+    setComment("");
+    context.addComment(comment, props.card);
   };
   
-  render() {
-    return <form onSubmit={this.handleSubmit}>
-      <textarea className="w-full p-2 h-32" name="comment"
-                placeholder="Ecrivez un commentaire"
-                onChange={this.handleChange}
-                value={this.state.name}>
-      </textarea>
-      <CardSubmitBtn/>
-    </form>
-  }
+  return <form onSubmit={handleSubmit}>
+    <textarea className="w-full p-2 h-32" name="comment"
+              placeholder="Ecrivez un commentaire"
+              onChange={handleChange}
+              value={comment}>
+    </textarea>
+    <CardSubmitBtn/>
+  </form>
   
-}
+};
 
 export default CardCommentForm;
