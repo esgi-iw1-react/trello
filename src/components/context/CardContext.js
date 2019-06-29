@@ -9,6 +9,7 @@ const CardContext = createContext({
   addLabel: () => {},
   removeLabel: () => {},
   editLabel: () => {},
+  addCard: () => {},
 });
 
 export default CardContext;

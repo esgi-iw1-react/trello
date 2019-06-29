@@ -83,6 +83,7 @@ class CardProvider extends Component {
                 newCards.push(newCard);
                 return newCard
               }
+              newCards.push(c);
               return c
             });
             return { ...l, cards: newCards };
@@ -102,6 +103,7 @@ class CardProvider extends Component {
                 newCards.push(newCard);
                 return newCard
               }
+              newCards.push(c);
               return c
             });
             return { ...l, cards: newCards };
@@ -121,6 +123,7 @@ class CardProvider extends Component {
                 newCards.push(newCard);
                 return newCard
               }
+              newCards.push(c);
               return c
             });
             return { ...l, cards: newCards };
@@ -140,6 +143,7 @@ class CardProvider extends Component {
                 newCards.push(newCard);
                 return newCard
               }
+              newCards.push(c);
               return c
             });
             return { ...l, cards: newCards };
@@ -149,22 +153,6 @@ class CardProvider extends Component {
       })
     },
     editLabel: (label, card, list) => {
-      // this.setState({
-      //   cards: this.state.cards.map((c) => {
-      //     if (c.id === card.id) {
-      //       return {
-      //         ...c,
-      //         labels: [...c.labels].map( (l) => {
-      //           if(l.color === label.color){
-      //             l.name = label.name;
-      //           }
-      //           return l;
-      //         })
-      //       };
-      //     }
-      //     return c
-      //   })
-      // })
       this.setState({
         lists: this.state.lists.map(l => {
           const newCards = [];
@@ -180,9 +168,20 @@ class CardProvider extends Component {
                 newCards.push(newCard);
                 return newCard
               }
+              newCards.push(c);
               return c
             });
             return { ...l, cards: newCards };
+          }
+          return l;
+        })
+      })
+    },
+    addCard: (title, list) => {
+      this.setState({
+        lists: this.state.lists.map(l => {
+          if(l.id === list.id){
+            return { ...l, cards: [...l.cards, { id: 4, title: title, description: '', labels: [], comments: []  }] }
           }
           return l;
         })

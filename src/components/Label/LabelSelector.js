@@ -7,9 +7,9 @@ const LabelSelector = (props) =>{
     [
       { name: 'Admin', color: 'bg-yellow-500' , selected: false},
       { name: 'Front', color: 'bg-red-500' , selected: false},
-      { name: 'Debug', color: 'bg-green-500' , selected: true},
+      { name: 'Debug', color: 'bg-green-500' , selected: false},
       { name: 'Back', color: 'bg-purple-500' , selected: false},
-      { name: 'Test', color: 'bg-blue-500' , selected: true}
+      { name: 'Test', color: 'bg-blue-500' , selected: false}
     ]
   );
   

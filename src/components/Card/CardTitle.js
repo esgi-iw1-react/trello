@@ -9,6 +9,7 @@ const CardTitle = (props) => {
   
   const handleChange = (e) => {
     setTitle(e.target.value);
+    setEdit(true);
   };
   
   const handleSubmit = (e) => {
