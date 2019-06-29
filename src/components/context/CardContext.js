@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const CardContext = createContext({
-  cards: [],
-  listCard: () => {},
+  lists: [],
+  fetchLists: () => {},
   addComment: () => {},
   editDescription: () => {},
   editTitle: () => {},

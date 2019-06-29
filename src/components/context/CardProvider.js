@@ -4,31 +4,53 @@ import CardContext from './CardContext';
 class CardProvider extends Component {
   
   state = {
-    cards: [],
-    listCard: () => {
+    lists: [],
+    fetchLists: () => {
       this.setState({
-        cards : [
+        lists : [
           {
             id: 1,
-            title: 'Bug de la mort',
-            description: '',
-            labels: [
-              { name: "Test", color: "bg-blue-500"},
-              { name: "Debug", color: "bg-green-500"}
-            ],
-            comments: [
-              "1er commentaire"
-            ],
+            name: 'DONE',
+            cards : [
+              {
+                id: 1,
+                title: 'Bug de la mort',
+                description: '',
+                labels: [
+                  { name: "Test", color: "bg-blue-500"},
+                  { name: "Debug", color: "bg-green-500"}
+                ],
+                comments: [
+                  "1er commentaire"
+                ],
+              },
+              {
+                id: 2,
+                title: 'Allo',
+                description: 'best description',
+                labels: [],
+                comments: [],
+              }
+            ]
           },
           {
             id: 2,
-            title: 'Allo',
-            description: 'best description',
-            labels: [],
-            comments: [],
+            name: 'IN PROGRESS',
+            cards: [
+              {
+                id: 3,
+                title: 'Finir le trello',
+                description: '',
+                labels: [
+                  { name: "JS", color: "bg-blue-500"},
+                  { name: "PHP", color: "bg-green-500"}
+                ],
+                comments: [],
+              },
+            ]
           }
         ]
-      })
+      });
     },
     addComment: (comment, card) => {
       this.setState({
