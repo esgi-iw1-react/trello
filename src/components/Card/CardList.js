@@ -1,7 +1,7 @@
 import React from 'react'
 import CardPreview from "./CardPreview";
 import { BrowserRouter as Router } from "react-router-dom";
-import AddBtn from "./AddBtn";
+import AddCardBtn from "./AddCardBtn";
 
 const CardList = (props) => {
   const { name, cards } = props.list;
@@ -12,7 +12,7 @@ const CardList = (props) => {
               cards.map( (card, index) => <CardPreview key={index} card={card} list={props.list}/>)
             }
           </Router>
-          <AddBtn list={props.list}/>
+          <AddCardBtn list={props.list}/>
     </div>
 };
 

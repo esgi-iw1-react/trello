@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import CardContext from "../context/CardContext";
 import CardList from "./CardList";
+import AddListInput from "./AddListInput";
 
 const CardListContainer = () => {
-  
   const context = useContext(CardContext);
   const ref = useRef();
   
@@ -18,6 +18,7 @@ const CardListContainer = () => {
         return <CardList key={index} list={list}/>
       })
     }
+    <AddListInput/>
   </div>
   
 };

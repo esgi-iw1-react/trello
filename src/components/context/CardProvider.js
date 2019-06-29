@@ -177,14 +177,20 @@ class CardProvider extends Component {
         })
       })
     },
-    addCard: (title, list) => {
+    addCard: (list) => {
       this.setState({
         lists: this.state.lists.map(l => {
           if(l.id === list.id){
-            return { ...l, cards: [...l.cards, { id: 4, title: title, description: '', labels: [], comments: []  }] }
+            return { ...l, cards: [...l.cards, { id: 4, title: '', description: '', labels: [], comments: []  }] }
           }
           return l;
         })
+      })
+    },
+    addList: (name) => {
+      // console.log(name);debugger;
+      this.setState({
+        lists: [...this.state.lists, { id: 3, name: name, cards: [] }]
       })
     }
   };

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import CardContext from "../context/CardContext";
 
-const AddBtn = (props) => {
+const AddCardBtn = (props) => {
   
   const context = useContext(CardContext);
   
   const handleClick = (e) => {
     e.preventDefault();
-    context.addCard('', props.list);
+    context.addCard(props.list);
   };
   
   return <>
@@ -17,4 +17,4 @@ const AddBtn = (props) => {
   </>
 };
 
-export default AddBtn;
+export default AddCardBtn;
