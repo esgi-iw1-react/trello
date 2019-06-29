@@ -88,7 +88,7 @@ class CardProvider extends Component {
           if (c.id === card.id) {
             return {
               ...c,
-              labels: [...c.labels].filter(label => label.name !== label.name)
+              labels: [...c.labels].filter(l => l.color !== label.color)
             };
           }
           return c

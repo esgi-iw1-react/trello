@@ -1,43 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-class CardAddBtn extends React.Component {
+const CardAddBtn = (props) => {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      showDiv: false,
-      children: ''
+  const [showDiv, setShowDiv] = useState(false);
+  const [children, setChildren] = useState('');
+  
+  useEffect(() => {
+    if(showDiv) {
+      setChildren(props.children);
+    } else {
+      setChildren('');
     }
-  }
+  }, [showDiv]);
   
-  handleClick = (e) => {
+  
+  const handleClick = (e) => {
     e.preventDefault();
-    this.setState({
-      showDiv: !this.state.showDiv
-    }, () => {
-      if(this.state.showDiv){
-        this.setState({
-          children: this.props.children
-        })
-      } else {
-        this.setState({
-          children: ''
-        })
-      }
-    });
+    setShowDiv(!showDiv);
   };
   
-  render() {
-    return (
-        <div className="relative">
-          <button className="bg-gray-500 font-semibold p-2 rounded text-gray-900 text-sm w-32 mb-2"
-                  onClick={this.handleClick}>
-                  {this.props.name}
-          </button>
-          {this.state.children}
-        </div>
-    );
-  }
+  return (
+      <div className="relative">
+        <button className="bg-gray-500 font-semibold p-2 rounded text-gray-900 text-sm w-32 mb-2"
+                onClick={handleClick}>
+                {props.name}
+        </button>
+        {children}
+      </div>
+  );
   
 }
 

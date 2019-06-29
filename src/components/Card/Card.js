@@ -1,5 +1,5 @@
 import React from 'react'
-import Label from "../Label/Label";
+import LabelSmall from "../Label/LabelSmall";
 import CardCommentForm from "./CardCommentForm";
 import CardSubtitle from "./CardSubtitle";
 import CardCommentItem from "./CardCommmentItem";
@@ -11,7 +11,7 @@ import LabelSelector from "../Label/LabelSelector";
 class Card extends React.Component {
   
   render() {
-    const {card, addComment} = this.props;
+    const {card} = this.props;
     return <>
       <div className="bg-gray-100 w-192 mx-auto mt-16 shadow p-10">
         <CardTitle title={card.title} card={card}/>
@@ -26,7 +26,7 @@ class Card extends React.Component {
                 <p className="text-sm text-gray-700 mb-2">Etiquettes</p>
                 <div className="flex justify-around">
                   {
-                    card.labels.map((label, index) => <Label key={index} name={label.name} color={label.color} />)
+                    card.labels.map((label, index) => <LabelSmall key={index} name={label.name} color={label.color} />)
                   }
                 </div>
               </div>
@@ -37,7 +37,7 @@ class Card extends React.Component {
             </div>
             <div>
               <CardSubtitle name="Ajouter un commentaire"/>
-              <CardCommentForm onSubmit={addComment} card={card}/>
+              <CardCommentForm card={card}/>
             </div>
             <div className="mt-4">
               <CardSubtitle name="Commentaires"/>
@@ -47,9 +47,9 @@ class Card extends React.Component {
             </div>
           </div>
           <div className="w-1/4 flex flex-col items-end">
-            <CardAddBtn card={card} name="Membres"/>
-            <CardAddBtn card={card} name="Labels"><LabelSelector card={card}/></CardAddBtn>
-            <CardAddBtn card={card} name="CheckList"/>
+            <CardAddBtn name="Membres"/>
+            <CardAddBtn name="Labels"><LabelSelector card={card}/></CardAddBtn>
+            <CardAddBtn name="CheckList"/>
             {/*<CardAddBtn click={addLabel} card={card} name="Date Limite"/>*/}
           </div>
         </div>
