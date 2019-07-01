@@ -3,6 +3,7 @@ import { createContext } from "react";
 const CardContext = createContext({
   lists: [],
   fetchLists: () => {},
+  reorder: () => {},
   addComment: () => {},
   editDescription: () => {},
   editTitle: () => {},

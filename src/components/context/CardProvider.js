@@ -52,6 +52,15 @@ class CardProvider extends Component {
         ]
       });
     },
+    reorder: (sourceCol, sourceIndex, destinationCol, destinationIndex) => {
+      const lists = [...this.state.lists];
+      const card = lists[sourceCol].cards[sourceIndex];
+      lists[sourceCol].cards.splice(sourceIndex, 1);
+      lists[destinationCol].cards.splice(destinationIndex, 0, card);
+      this.setState({
+        lists: lists
+      })
+    },
     addComment: (comment, card, list) => {
       this.setState({
         lists: this.state.lists.map(l => {

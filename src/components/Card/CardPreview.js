@@ -4,9 +4,9 @@ import { Route, Link } from "react-router-dom";
 import Card from "./Card";
 import { Draggable } from "react-beautiful-dnd";
 
-const CardPreview = ({ card, list }) => {
+const CardPreview = ({ card, list, index }) => {
   return <>
-    <Draggable draggableId={card.id} index={card.id}>
+    <Draggable draggableId={'draggable-'+card.id} index={index}>
       {provided => (
         <Link to={"/card/"+card.id}>
           <div className="cursor-pointer bg-gray-100 w-64 mb-6 shadow p-4"

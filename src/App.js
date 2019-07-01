@@ -7,7 +7,6 @@ import CardContext from "./components/context/CardContext";
 function App() {
   
   const context = useContext(CardContext);
-  
   const onDragEnd = result => {
     const { destination, source, draggableId } = result;
     if(!destination){
@@ -16,9 +15,11 @@ function App() {
     if(destination.droppableId === source.droppableId && destination.index === source.index){
       return;
     }
-    const lists = context.lists;
-    console.log(context, lists, lists.forEach(el => console.log(el)));
-    debugger;
+    const sourceCol = source.droppableId.split('-')[1];
+    const sourceIndex = source.index;
+    const destinationCol = destination.droppableId.split('-')[1];
+    const destinationIndex = destination.index;
+    context.reorder(sourceCol, sourceIndex, destinationCol, destinationIndex);
   };
   
   return (

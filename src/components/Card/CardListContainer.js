@@ -15,7 +15,7 @@ const CardListContainer = () => {
   return <div className="h-full flex mx-10">
     {
       context.lists.map((list, index) => {
-        return <CardList key={index} list={list}/>
+        return <CardList key={index} list={list} index={index}/>
       })
     }
     <AddListInput/>
