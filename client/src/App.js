@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import CardProvider from "./components/context/CardProvider";
+import CardProvider from "./context/CardProvider";
 import CardListContainer from "./components/Card/CardListContainer";
 import {DragDropContext} from "react-beautiful-dnd";
-import CardContext from "./components/context/CardContext";
+import CardContext from "./context/CardContext";
 
 function App() {
   

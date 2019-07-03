@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CardContext from "../context/CardContext";
+import CardContext from "../../context/CardContext";
 
 const AddCardBtn = (props) => {
   

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './output.css';
 import * as serviceWorker from './serviceWorker';
 import App from "./App";
-import CardProvider from "./components/context/CardProvider";
+import CardProvider from "./context/CardProvider";
 
 
 ReactDOM.render(

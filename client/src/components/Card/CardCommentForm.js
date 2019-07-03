@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import CardSubmitBtn from "./CardSubmitBtn";
-import CardContext from "../context/CardContext";
+import CardContext from "../../context/CardContext";
 
 const CardCommentForm = (props) => {
   

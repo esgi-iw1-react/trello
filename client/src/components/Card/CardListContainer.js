@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import CardContext from "../context/CardContext";
+import CardContext from "../../context/CardContext";
 import CardList from "./CardList";
 import AddListInput from "./AddListInput";
 
