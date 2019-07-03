@@ -26,9 +26,7 @@ function App() {
     <div className="App">
       <header className="text-center font-bold text-3xl text-blue-600 py-4">Mini trello !</header>
         <DragDropContext onDragEnd={onDragEnd}>
-          <CardProvider>
             <CardListContainer/>
-          </CardProvider>
         </DragDropContext>
     </div>
   );
