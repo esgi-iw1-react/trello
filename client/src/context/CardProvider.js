@@ -215,7 +215,7 @@ class CardProvider extends Component {
           this.setState({
             lists: this.state.lists.map(l => {
               if(l._id === list._id){
-                return { ...l, cards: [...l.cards, { id: data._id, title: '', description: '', labels: [], comments: []  }] }
+                return { ...l, cards: [...l.cards, { _id: data._id, title: '', description: '', labels: [], comments: []  }] }
               }
               return l;
             })
