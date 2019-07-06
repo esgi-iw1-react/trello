@@ -9,6 +9,7 @@ class CardProvider extends Component {
     this.state = {
       lists: [],
       labels: [],
+      user: {},
       fetchLists: () => {
         fetch(`${this.url}/list`)
           .then(res => res.json())
@@ -231,6 +232,19 @@ class CardProvider extends Component {
               lists: [...this.state.lists, { id: data._id, name: name, cards: [] }]
             })
           });
+      },
+      login: (email, password) => {
+        fetch(`${this.url}/login`, {
+          method: 'POST',
+          body: JSON.stringify({email: email, password: password}),
+          headers: {
+            'Content-type': 'application/json'
+          }
+        }).then(res => res.json())
+          .then(token => {
+            console.log(token);
+          })
+          .catch(err => console.log(err))
       }
     };
   }

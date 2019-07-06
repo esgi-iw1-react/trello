@@ -6,10 +6,11 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 router.post("/login", (req, res) => {
+  console.log("here");
   User.login(req.body.email, req.body.password)
     .then(user => {
       const token = createToken({
-        firstName: user.firstname
+        username: user.username
       });
 
       res.status(201).send({ token });
