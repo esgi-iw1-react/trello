@@ -169,7 +169,7 @@ class CardProvider extends Component {
       editLabel: (label, card, list) => {
         fetch(`${this.url}/label/${label._id}`, {
           method: 'PUT',
-          body: JSON.stringify({name: label}),
+          body: JSON.stringify({name: label.name}),
           headers: { 'Content-type': 'application/json' }
         })
           .then(res => res.json())
@@ -215,7 +215,7 @@ class CardProvider extends Component {
           this.setState({
             lists: this.state.lists.map(l => {
               if(l._id === list._id){
-                return { ...l, cards: [...l.cards, { id: 4, title: '', description: '', labels: [], comments: []  }] }
+                return { ...l, cards: [...l.cards, { id: data._id, title: '', description: '', labels: [], comments: []  }] }
               }
               return l;
             })
@@ -223,10 +223,14 @@ class CardProvider extends Component {
         })
       },
       addList: (name) => {
-        // console.log(name);debugger;
-        this.setState({
-          lists: [...this.state.lists, { id: 3, name: name, cards: [] }]
-        })
+        fetch(`${this.url}/list`,
+          { method: 'POST', body: JSON.stringify({name: name}), headers: {'Content-type': 'application/json'}
+        }).then(res => res.json())
+          .then(data => {
+            this.setState({
+              lists: [...this.state.lists, { id: data._id, name: name, cards: [] }]
+            })
+          });
       }
     };
   }

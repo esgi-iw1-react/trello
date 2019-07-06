@@ -26,6 +26,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);debugger;
   const list = new List({
     _id: new mongoose.Types.ObjectId,
     name: req.body.name

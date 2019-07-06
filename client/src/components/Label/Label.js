@@ -34,14 +34,14 @@ const Label = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEdit(!edit);
-    context.editLabel({ name, selected, color }, props.card, props.list);
+    context.editLabel({_id: props.id, name, selected, color }, props.card, props.list);
   };
   
   return <div className="flex items-center">
         {edit ?
         <form onSubmit={handleSubmit}>
           <input className="text-gray-900 z-20 w-full" type="text" value={name} onChange={handleChange}/>
-          <label for="submit">
+          <label>
             <input type="submit" className="hidden" id="submit"/>
           </label>
         </form>
