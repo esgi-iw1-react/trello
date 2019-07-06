@@ -1,4 +1,6 @@
 const express = require('express');
+// const User = require('../models/user');
+const Label = require('../models/label');
 const Card = require('../models/card');
 const List = require('../models/list');
 const mongoose = require('mongoose');
@@ -21,16 +23,14 @@ router.get('/:id', (req, res) => {
   .catch(error => console.log(error))
 });
 
-router.post('/:listId', (req, res) => {
-  const card = new Card({
-    _id: new mongoose.Types.ObjectId
+router.post('/', (req, res) => {
+  const label = new Label({
+    _id: new mongoose.Types.ObjectId,
+    name: req.body.name,
+    color: req.body.color,
   });
-  card.save()
-  .then(data => {
-    List.findByIdAndUpdate(req.params.listId, { $push: { cards: data._id } }, {upsert: true},
-      function(err, model) { console.log(err, model) });
-    res.status(201).send(data)
-  })
+  label.save()
+  .then(data => res.json(data))
   .catch(error => res.status(500));
 });
 
@@ -43,19 +43,6 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.put('/:cardId/label/add/:labelId', (req, res) => {
-  Card.findByIdAndUpdate({_id: req.params.cardId}, { $push: { labels: req.params.labelId} }, (err, doc) => {
-    if (err) return res.send(500, { error: err});
-    return res.send(doc);
-  })
-});
-
-router.put('/:cardId/label/remove/:labelId', (req, res) => {
-  Card.findByIdAndUpdate({_id: req.params.cardId}, { $pull: { labels: req.params.labelId} }, (err, doc) => {
-    if (err) return res.send(500, { error: err});
-    return res.send(doc);
-  })
-});
 
 
 

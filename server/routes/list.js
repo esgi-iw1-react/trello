@@ -6,7 +6,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   List.find(req.query)
-    .then(data => res.json(data));
+    .populate( {
+      path: 'cards',
+      populate: {
+        path: 'labels',
+        model: 'Label'
+      }
+    } )
+  .then(data => res.json(data));
 });
 
 router.get('/:id', (req, res) => {

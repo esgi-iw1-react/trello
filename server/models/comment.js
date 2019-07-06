@@ -1,12 +1,12 @@
 const db = require('../lib/db');
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const CommentSchema = Schema({
   _id: Schema.Types.ObjectId,
-  text: String,
-  author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  text: { type: String, required: true},
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
+  created_at: { type: Date, default: Date.now() }
 });
 
 const Comment = db.model('Comment', CommentSchema);
