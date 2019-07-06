@@ -7,6 +7,7 @@ const CardContext = createContext({
   addComment: () => {},
   editDescription: () => {},
   editTitle: () => {},
+  fetchLabels: () => {},
   addLabel: () => {},
   removeLabel: () => {},
   editLabel: () => {},

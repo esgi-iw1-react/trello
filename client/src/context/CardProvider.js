@@ -5,54 +5,18 @@ class CardProvider extends Component {
   
   constructor(props) {
     super(props);
+    this.url = 'http://localhost:3001';
     this.state = {
       lists: [],
+      labels: [],
       fetchLists: () => {
-        this.setState({
-          lists : [
-            {
-              id: 1,
-              name: 'DONE',
-              cards : [
-                {
-                  id: 1,
-                  title: 'Bug de la mort',
-                  description: '',
-                  labels: [
-                    { name: "Test", color: "bg-blue-500"},
-                    { name: "Debug", color: "bg-green-500"}
-                  ],
-                  comments: [
-                    "1er commentaire"
-                  ],
-                },
-                {
-                  id: 2,
-                  title: 'Allo',
-                  description: 'best description',
-                  labels: [],
-                  comments: [],
-                }
-              ]
-            },
-            {
-              id: 2,
-              name: 'IN PROGRESS',
-              cards: [
-                {
-                  id: 3,
-                  title: 'Finir le trello',
-                  description: '',
-                  labels: [
-                    { name: "JS", color: "bg-blue-500"},
-                    { name: "PHP", color: "bg-green-500"}
-                  ],
-                  comments: [],
-                },
-              ]
-            }
-          ]
-        });
+        fetch(`${this.url}/list`)
+          .then(res => res.json())
+          .then(data => {
+            this.setState({
+              lists: data
+            })
+          })
       },
       reorder: (sourceCol, sourceIndex, destinationCol, destinationIndex) => {
         const lists = [...this.state.lists];
@@ -64,137 +28,197 @@ class CardProvider extends Component {
         });
       },
       addComment: (comment, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if (c.id === card.id) {
-                  let updatedCard = { ...c, comments: [...c.comments, comment] };
-                  newCards.push(updatedCard);
-                  return updatedCard;
-                }
-                newCards.push(c);
-                return c;
-              });
-              return { ...l, cards: newCards};
-            }
-            return l;
-          })
+        fetch(`${this.url}/comment/${card._id}`, {
+          method: 'POST',
+          body: JSON.stringify({text: comment, author: '5d1e6ceeae083f00eee07507'}),
+          headers: {
+            'Content-Type': 'application/json',
+          }
         })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              const newCards = [];
+              if(l._id === list._id){
+                l.cards.map(c => {
+                  if (c._id === card._id) {
+                    let updatedCard = { ...c, comments: [...c.comments, {text: comment, author: '5d1e6ceeae083f00eee07507'}] };
+                    newCards.push(updatedCard);
+                    return updatedCard;
+                  }
+                  newCards.push(c);
+                  return c;
+                });
+                return { ...l, cards: newCards};
+              }
+              return l;
+            })
+          })
+        });
       },
       editDescription: (description, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if(c.id === card.id){
-                  const newCard = { ...c, description: description };
-                  newCards.push(newCard);
-                  return newCard
-                }
-                newCards.push(c);
-                return c
-              });
-              return { ...l, cards: newCards };
-            }
-            return l;
-          })
+        fetch(`${this.url}/card/${card._id}`, {
+          method: 'PUT',
+          body: JSON.stringify({description: description}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              const newCards = [];
+              if(l._id === list._id){
+                l.cards.map(c => {
+                  if(c._id === card._id){
+                    const newCard = { ...c, description: description };
+                    newCards.push(newCard);
+                    return newCard
+                  }
+                  newCards.push(c);
+                  return c
+                });
+                return { ...l, cards: newCards };
+              }
+              return l;
+            })
+          })
+        });
+        
       },
       editTitle: (title, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if(c.id === card.id){
-                  const newCard = { ...c, title: title };
-                  newCards.push(newCard);
-                  return newCard
-                }
-                newCards.push(c);
-                return c
-              });
-              return { ...l, cards: newCards };
-            }
-            return l;
+        fetch(`${this.url}/card/${card._id}`, {
+          method: 'PUT',
+          body: JSON.stringify({title: title}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              const newCards = [];
+              if(l._id === list._id){
+                l.cards.map(c => {
+                  if(c._id === card._id){
+                    const newCard = { ...c, title: title };
+                    newCards.push(newCard);
+                    return newCard
+                  }
+                  newCards.push(c);
+                  return c
+                });
+                return { ...l, cards: newCards };
+              }
+              return l;
+            })
           })
         })
       },
       addLabel: (label, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if(c.id === card.id){
-                  const newCard = { ...c, labels: [...c.labels, label] };
-                  newCards.push(newCard);
-                  return newCard
-                }
-                newCards.push(c);
-                return c
-              });
-              return { ...l, cards: newCards };
-            }
-            return l;
+        fetch(`${this.url}/card/${card._id}/label/add/${label._id}`, { method: 'PUT'})
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              const newCards = [];
+              if(l._id === list._id){
+                l.cards.map(c => {
+                  if(c._id === card._id){
+                    const newCard = { ...c, labels: [...c.labels, label] };
+                    newCards.push(newCard);
+                    return newCard
+                  }
+                  newCards.push(c);
+                  return c
+                });
+                return { ...l, cards: newCards };
+              }
+              return l;
+            })
           })
-        })
+        });
       },
       removeLabel: (label, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if(c.id === card.id){
-                  const newCard = { ...c, labels: [...c.labels].filter(l => l.color !== label.color)};
-                  newCards.push(newCard);
-                  return newCard
-                }
-                newCards.push(c);
-                return c
-              });
-              return { ...l, cards: newCards };
-            }
-            return l;
+        fetch(`${this.url}/card/${card._id}/label/remove/${label._id}`, { method: 'PUT'})
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              const newCards = [];
+              if(l._id === list._id){
+                l.cards.map(c => {
+                  if(c._id === card._id){
+                    const newCard = { ...c, labels: [...c.labels].filter(l => l.color !== label.color)};
+                    newCards.push(newCard);
+                    return newCard
+                  }
+                  newCards.push(c);
+                  return c
+                });
+                return { ...l, cards: newCards };
+              }
+              return l;
+            })
           })
         })
       },
       editLabel: (label, card, list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            const newCards = [];
-            if(l.id === list.id){
-              l.cards.map(c => {
-                if(c.id === card.id){
-                  const newCard = { ...c, labels: [...c.labels].map( lab => {
-                      if(lab.color === label.color){
-                        lab.name = label.name
-                      }
-                      return lab;
-                    })};
-                  newCards.push(newCard);
-                  return newCard
+        fetch(`${this.url}/label/${label._id}`, {
+          method: 'PUT',
+          body: JSON.stringify({name: label}),
+          headers: { 'Content-type': 'application/json' }
+        })
+          .then(res => res.json())
+          .then(data => {
+            this.setState({
+              lists: this.state.lists.map(l => {
+                const newCards = [];
+                if(l._id === list._id){
+                  l.cards.map(c => {
+                    if(c._id === card._id){
+                      const newCard = { ...c, labels: [...c.labels].map( lab => {
+                          if(lab.color === label.color){
+                            lab.name = label.name
+                          }
+                          return lab;
+                        })};
+                      newCards.push(newCard);
+                      return newCard
+                    }
+                    newCards.push(c);
+                    return c
+                  });
+                  return { ...l, cards: newCards };
                 }
-                newCards.push(c);
-                return c
-              });
-              return { ...l, cards: newCards };
-            }
-            return l;
+                return l;
+              })
+            })
+          });
+      },
+      fetchLabels: () => {
+        fetch(`${this.url}/label`)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            labels: data
           })
         })
       },
       addCard: (list) => {
-        this.setState({
-          lists: this.state.lists.map(l => {
-            if(l.id === list.id){
-              return { ...l, cards: [...l.cards, { id: 4, title: '', description: '', labels: [], comments: []  }] }
-            }
-            return l;
+        fetch(`${this.url}/card/${list._id}`, { method: 'POST'})
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            lists: this.state.lists.map(l => {
+              if(l._id === list._id){
+                return { ...l, cards: [...l.cards, { id: 4, title: '', description: '', labels: [], comments: []  }] }
+              }
+              return l;
+            })
           })
         })
       },

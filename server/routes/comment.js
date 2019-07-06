@@ -15,7 +15,7 @@ router.post('/:cardId', (req, res) => {
   .then(data => {
     Card.findByIdAndUpdate(req.params.cardId, { $push: { comments: data._id } }, {upsert: true},
       function(err, model) { console.log(err, model) });
-    res.status(201).send(data)
+    return res.status(201).send(data)
   })
   .catch(error => res.status(500));
 });

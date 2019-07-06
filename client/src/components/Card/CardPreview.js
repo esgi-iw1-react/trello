@@ -8,7 +8,7 @@ const CardPreview = ({ card, list, index }) => {
   return <>
     <Draggable draggableId={'draggable-'+card.id} index={index}>
       {provided => (
-        <Link to={"/card/"+card.id}>
+        <Link to={"/card/"+card._id}>
           <div className="cursor-pointer bg-gray-100 w-64 mb-6 shadow p-4"
                {...provided.dragHandleProps}
                {...provided.draggableProps}
@@ -24,7 +24,7 @@ const CardPreview = ({ card, list, index }) => {
         </Link>
       )}
     </Draggable>
-    <Route path={"/card/"+card.id} render={(props) => <Card {...props} card={card} list={list} />}/>
+    <Route path={"/card/"+card._id} render={(props) => <Card {...props} card={card} list={list} />}/>
   </>
   
 };

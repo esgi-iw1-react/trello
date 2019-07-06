@@ -36,7 +36,13 @@ router.post('/:listId', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const body = req.body;
-  const doc = {description: body.description, title: body.title};
+  let doc = {};
+  if(body.description){
+    doc.description = body.description;
+  }
+  if(body.title){
+    doc.title = body.title;
+  }
   Card.findOneAndUpdate({_id: req.params.id}, doc, {upsert:true}, function(err, doc){
     if (err) return res.send(500, { error: err });
     return res.send(doc);

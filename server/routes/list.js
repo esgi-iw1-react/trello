@@ -8,10 +8,12 @@ router.get('/', (req, res) => {
   List.find(req.query)
     .populate( {
       path: 'cards',
-      populate: {
-        path: 'labels',
-        model: 'Label'
-      }
+      populate: [
+        { path: 'labels', model: 'Label' },
+        { path: 'comments', model: 'Comment',
+          populate: {path: 'author', model: 'User'}
+        }
+      ],
     } )
   .then(data => res.json(data));
 });

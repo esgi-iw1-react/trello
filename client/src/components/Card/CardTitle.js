@@ -23,7 +23,7 @@ const CardTitle = (props) => {
     setEdit(true);
   };
   
-  if(title !== "" && !edit){
+  if(title && !edit){
     return <h1 className="font-bold text-gray-900 text-sm text-xl" onClick={toggleEdit}>{title}</h1>
   } else {
     return <form onSubmit={handleSubmit}>

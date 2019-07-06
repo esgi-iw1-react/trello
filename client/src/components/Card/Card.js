@@ -48,7 +48,7 @@ const Card = ({ card, list }) => {
             <div className="mt-4">
               <CardSubtitle name="Commentaires"/>
               <ul>
-                { card.comments.map((comment, index) => <CardCommentItem key={index} name={comment}/>) }
+                { card.comments.map((comment, index) => <CardCommentItem key={index} comment={comment}/>) }
               </ul>
             </div>
           </div>

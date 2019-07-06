@@ -13,7 +13,7 @@ const Label = (props) => {
   const check = (e) => {
     e.preventDefault();
     setSelected(!selected);
-    const label = { name, selected, color };
+    const label = { _id: props.id, name, selected, color };
     if(!selected){
       context.addLabel(label, props.card, props.list)
     } else {

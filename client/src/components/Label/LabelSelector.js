@@ -1,30 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import Label from "./Label";
+import CardContext from "../../context/CardContext";
 
 const LabelSelector = (props) =>{
   
-  const [labels, setLabels] = useState(
-    [
-      { name: 'Admin', color: 'bg-yellow-500' , selected: false},
-      { name: 'Front', color: 'bg-red-500' , selected: false},
-      { name: 'Debug', color: 'bg-green-500' , selected: false},
-      { name: 'Back', color: 'bg-purple-500' , selected: false},
-      { name: 'Test', color: 'bg-blue-500' , selected: false}
-    ]
-  );
+  const context = useContext(CardContext);
+  const ref = useRef();
   
-  return (
-    <div className="p-4 bg-white shadow absolute top-auto right-0 z-10 w-56">
-      <div className="flex flex-col w-full">
-        {
-          labels.map( (label, index) => { return <Label key={index} name={label.name}
-                                                        color={label.color} selected={label.selected}
-                                                        card={props.card} list={props.list}
-          /> })
-        }
+  useEffect( () => {
+    context.fetchLabels();
+    ref.current = true;
+  }, []);
+  
+  if(context.labels.length > 0){
+    const labelIds = props.card.labels.map(label => label._id);
+    const labels = context.labels.map(label => {
+      if(labelIds.includes(label._id)){
+        label.selected = true;
+      } else {
+        label.selected = false;
+      }
+      return label;
+    });
+    return <div className="p-4 bg-white shadow absolute top-auto right-0 z-10 w-56">
+        <div className="flex flex-col w-full">
+          {
+            labels.map( (label, index) => { return <Label key={index} id={label._id} name={label.name}
+                                                          color={label.color}
+                                                          card={props.card} list={props.list} selected={label.selected}
+            /> })
+          }
+        </div>
       </div>
-    </div>
-  )
+  } else {
+    return <div>fuckk</div>
+  }
   
 };
 

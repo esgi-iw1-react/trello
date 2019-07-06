@@ -1,4 +1,3 @@
-const db = require('./lib/db');
 const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
@@ -16,6 +15,7 @@ app.use(cors());
 app.use(bodyparser.json());
 app.use('/', SecurityRouter);
 // app.use(verifyToken);
+app.use('/comment', CommentRouter);
 app.use('/label', LabelRouter);
 app.use('/user', UserRouter);
 app.use('/list', ListRouter);
