@@ -25,7 +25,7 @@ const CardDescription = (props) => {
   };
   
   
-  if(description !== "" && !edit){
+  if(description && !edit){
     return <p className="py-1 text-gray-700 text-sm" onClick={toggleEdit}>{description}</p>
   } else {
     return <form onSubmit={handleSubmit}>

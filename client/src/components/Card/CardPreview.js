@@ -6,7 +6,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 const CardPreview = ({ card, list, index }) => {
   return <>
-    <Draggable draggableId={'draggable-'+card.id} index={index}>
+    <Draggable draggableId={'draggable-'+card._id} index={index}>
       {provided => (
         <Link to={"/card/"+card._id}>
           <div className="cursor-pointer bg-gray-100 w-64 mb-6 shadow p-4"
