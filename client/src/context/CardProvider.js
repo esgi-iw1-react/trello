@@ -234,17 +234,28 @@ class CardProvider extends Component {
           });
       },
       login: (email, password) => {
-        fetch(`${this.url}/login`, {
-          method: 'POST',
-          body: JSON.stringify({email: email, password: password}),
-          headers: {
-            'Content-type': 'application/json'
-          }
-        }).then(res => res.json())
-          .then(token => {
-            console.log(token);
+        return new Promise((resolve, reject) => {
+          fetch(`${this.url}/login`, {
+            method: 'POST',
+            body: JSON.stringify({email: email, password: password}),
+            headers: {
+              'Content-type': 'application/json'
+            }
+          }).then(res => {
+            if(res.status === 400){
+              return reject(res.statusText);
+            }
+            return res.json();
+          })
+          .then(user => {
+            this.setState({
+              user: user
+            });
+            localStorage.setItem('user', JSON.stringify(user));
+            return resolve();
           })
           .catch(err => console.log(err))
+        });
       }
     };
   }

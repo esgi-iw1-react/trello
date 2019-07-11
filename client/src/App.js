@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import CardListContainer from "./components/Card/CardListContainer";
 import {DragDropContext} from "react-beautiful-dnd";
 import CardContext from "./context/CardContext";
-import Login from "./components/Auth/login";
 
 function App() {
   
@@ -24,11 +23,10 @@ function App() {
   
   return (
     <div className="App">
-      <Login/>
-      {/*<header className="text-center font-bold text-3xl text-blue-600 py-4">Mini trello !</header>*/}
-      {/*  <DragDropContext onDragEnd={onDragEnd}>*/}
-      {/*      <CardListContainer/>*/}
-      {/*  </DragDropContext>*/}
+      <header className="text-center font-bold text-3xl text-blue-600 py-4">Mini trello !</header>
+      <DragDropContext onDragEnd={onDragEnd}>
+          <CardListContainer/>
+      </DragDropContext>
     </div>
   );
 }
