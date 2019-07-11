@@ -15,6 +15,8 @@ const CardContext = createContext({
   editLabel: () => {},
   addCard: () => {},
   addList: () => {},
+  login: () => {},
+  register: () => {}
 });
 
 export default CardContext;

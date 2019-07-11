@@ -6,7 +6,8 @@ import App from "./App";
 import CardProvider from "./context/CardProvider";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import {Route, BrowserRouter as Router} from "react-router-dom";
-import Login from "./components/Auth/login";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Router>
       <PrivateRoute path="/" exact component={App}/>
       <Route path="/login" exact component={Login}/>
+      <Route path="/register" exact component={Register}/>
     </Router>
   </CardProvider>, document.getElementById('root'));
 

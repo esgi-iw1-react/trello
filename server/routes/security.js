@@ -26,17 +26,15 @@ router.post("/login", (req, res) => {
 router.post("/register", (req, res) => {
   const user = new User({
     _id: new mongoose.Types.ObjectId,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
 
   user.register().then(data => {
-    console.log(data);
 
     const token = createToken({
-      firstName: data.firstname
+      firstName: data.username
     });
     console.log(token);
 

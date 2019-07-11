@@ -256,6 +256,24 @@ class CardProvider extends Component {
           })
           .catch(err => console.log(err))
         });
+      },
+      register: (username, email, password) => {
+        return new Promise((resolve, reject) => {
+          fetch(`${this.url}/register`, {
+            method: 'POST',
+            body: JSON.stringify({username: username, email: email, password: password}),
+            headers: {
+              'Content-type': 'application/json'
+            }
+          })
+          .then(res => {
+            if(res.statusCode === 400){
+              return reject(res.statusText);
+            }
+            return resolve(res.json());
+          })
+          .catch(err => console.log(err))
+        })
       }
     };
   }
