@@ -9,7 +9,7 @@ const CardPreview = ({ card, list, index }) => {
     <Draggable draggableId={'draggable-'+card._id} index={index}>
       {provided => (
         <Link to={"/card/"+card._id}>
-          <div className="cursor-pointer bg-gray-100 w-64 mb-6 shadow p-4"
+          <div className="cursor-pointer bg-gray-100 mb-6 shadow p-4"
                {...provided.dragHandleProps}
                {...provided.draggableProps}
                ref={provided.innerRef}

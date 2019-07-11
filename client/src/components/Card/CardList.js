@@ -10,7 +10,7 @@ const CardList = (props) => {
   <Droppable droppableId={'droppable-'+props.index}>
     {provided => (
       <>
-      <div className="flex flex-col p-6 mr-2 bg-gray-200 rounded" {...provided.droppableProps} ref={provided.innerRef}>
+      <div className="flex flex-col p-6 mr-2 bg-gray-200 rounded w-72" {...provided.droppableProps} ref={provided.innerRef}>
         <p className="font-bold uppercase text-blue-700 mb-4">{name}</p>
         <Router>
           {cards.map((card, index) => <CardPreview index={index} key={index} card={card} list={props.list}/>)}

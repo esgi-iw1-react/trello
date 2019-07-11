@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import CardListContainer from "./components/Card/CardListContainer";
 import {DragDropContext} from "react-beautiful-dnd";
 import CardContext from "./context/CardContext";
+import Header from './components/Header';
 
 function App() {
   
@@ -23,7 +24,7 @@ function App() {
   
   return (
     <div className="App">
-      <header className="text-center font-bold text-3xl text-blue-600 py-4">Mini trello !</header>
+      <Header/>
       <DragDropContext onDragEnd={onDragEnd}>
           <CardListContainer/>
       </DragDropContext>

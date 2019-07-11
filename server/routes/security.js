@@ -14,7 +14,7 @@ router.post("/login", (req, res) => {
       });
       user.token = token.token;
       user.password = undefined;
-      res.status(201).send({ user });
+      res.status(201).send( user );
     })
     .catch(error => {
       res.status(400).send("Invalid token");
