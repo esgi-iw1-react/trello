@@ -14,7 +14,7 @@ const CardCommentForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setComment("");
-    context.addComment(comment, props.card, props.list);
+    context.addComment({ text: comment, author: JSON.parse(localStorage.getItem('user')), created_at: Date.now() }, props.card, props.list);
   };
   
   return <form onSubmit={handleSubmit}>

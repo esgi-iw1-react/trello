@@ -4,6 +4,7 @@ import AuthHeader from "./AuthHeader";
 import AuthFormWrap from "./AuthFormWrap";
 import AuthFormInput from "./AuthFormInput";
 import AuthSubmitButton from './AuthSubmitButton';
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   
@@ -29,7 +30,7 @@ const Login = (props) => {
           <p className="font-bold mb-10 text-3xl text-blue-800 text-center uppercase">Connexion</p>
           <AuthFormInput name="Email" placeholder="test@test.com" type="email" onChange={onChangeEmail}/>
           <AuthFormInput name="Mot de passe" placeholder="*****" type="password" onChange={onChangePassword}/>
-          <p className="font-semibold text-blue-500 mb-3">S'inscrire</p>
+          <Link className="font-semibold text-blue-500 mb-3" to="/register">S'inscrire</Link>
           <AuthSubmitButton name="Se connecter"/>
           <p className="text-red-500 font-bold mt-4 text-lg">{error}</p>
         </form>

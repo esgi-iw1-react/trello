@@ -23,7 +23,7 @@ const CardPreview = ({ card, list, index }) => {
             <p className="text-gray-700 font-semibold">{card.title}</p>
             <div className="flex mt-2 justify-end">
               {
-                card.users.map((user, index) => { return <UserAvatar username={user.username.charAt(0).toUpperCase()}/>   })
+                card.users.map((user, index) => { return <UserAvatar key={index} username={user.username.charAt(0).toUpperCase()}/>   })
               }
             </div>
           </div>

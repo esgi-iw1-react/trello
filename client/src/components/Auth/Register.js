@@ -4,6 +4,8 @@ import AuthFormWrap from "./AuthFormWrap";
 import AuthFormInput from "./AuthFormInput";
 import AuthSubmitButton from "./AuthSubmitButton";
 import CardContext from "../../context/CardContext";
+import { Link } from "react-router-dom";
+
 
 const Register = (props) => {
   
@@ -47,9 +49,8 @@ const Register = (props) => {
           <AuthFormInput name="Nom d'utilisateur" placeholder="toto" type="text" onChange={onChangeUsername}/>
           <AuthFormInput name="Email" placeholder="test@test.com" type="email" onChange={onChangeEmail}/>
           <AuthFormInput name="Mot de passe" placeholder="*****" type="password" onChange={onChangePassword}/>
-          <p className="font-semibold text-blue-500 mb-3">Se connecter</p>
+          <Link className="font-semibold text-blue-500 mb-3" to="/login">Se connecter</Link>
           <AuthSubmitButton name="S'inscrire"/>
-          {/*<p className="text-red-500 font-bold mt-4 text-lg">{error}</p>*/}
         </form>
       </AuthFormWrap>
     </div>

@@ -32,7 +32,7 @@ class CardProvider extends Component {
       addComment: (comment, card, list) => {
         fetch(`${this.url}/comment/${card._id}`, {
           method: 'POST',
-          body: JSON.stringify({text: comment, author: '5d1e6ceeae083f00eee07507'}),
+          body: JSON.stringify(comment),
           headers: {
             'Content-Type': 'application/json',
           }
@@ -45,7 +45,7 @@ class CardProvider extends Component {
               if(l._id === list._id){
                 l.cards.map(c => {
                   if (c._id === card._id) {
-                    let updatedCard = { ...c, comments: [...c.comments, {text: comment, author: '5d1e6ceeae083f00eee07507'}] };
+                    let updatedCard = { ...c, comments: [...c.comments, comment] };
                     newCards.push(updatedCard);
                     return updatedCard;
                   }
