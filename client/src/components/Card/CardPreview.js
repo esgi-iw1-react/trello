@@ -3,6 +3,7 @@ import LabelSmall from "../Label/LabelSmall";
 import { Route, Link } from "react-router-dom";
 import Card from "./Card";
 import { Draggable } from "react-beautiful-dnd";
+import UserAvatar from "../User/UserAvatar";
 
 const CardPreview = ({ card, list, index }) => {
   return <>
@@ -20,6 +21,11 @@ const CardPreview = ({ card, list, index }) => {
               }
             </div>
             <p className="text-gray-700 font-semibold">{card.title}</p>
+            <div className="flex mt-2 justify-end">
+              {
+                card.users.map((user, index) => { return <UserAvatar username={user.username.charAt(0).toUpperCase()}/>   })
+              }
+            </div>
           </div>
         </Link>
       )}

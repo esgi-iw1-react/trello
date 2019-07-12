@@ -283,32 +283,27 @@ class CardProvider extends Component {
         .catch(err => console.log(err));
       },
       cardAddUser: (user, card, list) => {
-        console.log(card._id, list._id);
         fetch(`${this.url}/card/${card._id}/user/add/${user._id}`, {method: 'PUT'})
         .then(res => res.json())
         .then(data => {
           this.setState({
-            list: this.state.lists.map(l => {
+            lists: this.state.lists.map(l => {
               const newCards = [];
               if(l._id === list._id) {
                 l.cards.map(c => {
                   if(c._id === card._id){
                     const newCard = { ...c, users: [...c.users, user] };
-                    console.log(c.users);
-                    console.log(newCard.users);
                     newCards.push(newCard);
                     return newCard;
                   }
                   newCards.push(c);
                   return c;
                 });
-                console.log(newCards);
-                console.log(l, {...l, cards: newCards});
                 return { ...l, cards: newCards };
               }
               return l;
             })
-          }, () => console.log(this.state.lists[0].cards[0].users))
+          })
         })
         .catch(err => console.log(err))
       },
@@ -317,7 +312,7 @@ class CardProvider extends Component {
         .then(res => res.json())
         .then(data => {
           this.setState({
-            list: this.state.lists.map(l => {
+            lists: this.state.lists.map(l => {
               const newCards = [];
               if(l._id === list._id) {
                 l.cards.map(c => {
@@ -333,7 +328,7 @@ class CardProvider extends Component {
               }
               return l;
             })
-          }, () => console.log(this.state.lists[0].cards[0].users))
+          })
         })
         .catch(err => console.log(err))
       }
