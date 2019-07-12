@@ -4,6 +4,7 @@ const CardContext = createContext({
   lists: [],
   labels: [],
   user: {},
+  users: [],
   fetchLists: () => {},
   reorder: () => {},
   addComment: () => {},
@@ -16,7 +17,10 @@ const CardContext = createContext({
   addCard: () => {},
   addList: () => {},
   login: () => {},
-  register: () => {}
+  register: () => {},
+  fetchUsers: () => {},
+  cardAddUsers: () => {},
+  cardRemoveUsers: () => {},
 });
 
 export default CardContext;

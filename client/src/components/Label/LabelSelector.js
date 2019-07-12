@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import Label from "./Label";
 import CardContext from "../../context/CardContext";
 
@@ -12,7 +12,7 @@ const LabelSelector = (props) =>{
     ref.current = true;
   }, []);
   
-  if(context.labels.length > 0){
+  if(context.labels.length > 0) {
     const labelIds = props.card.labels.map(label => label._id);
     const labels = context.labels.map(label => {
       if(labelIds.includes(label._id)){
@@ -33,7 +33,7 @@ const LabelSelector = (props) =>{
         </div>
       </div>
   } else {
-    return <div>fuckk</div>
+    return <div></div>;
   }
   
 };

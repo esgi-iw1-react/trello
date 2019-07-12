@@ -63,6 +63,20 @@ router.put('/:cardId/label/remove/:labelId', (req, res) => {
   })
 });
 
+router.put('/:cardId/user/add/:userId', (req, res) => {
+  Card.findByIdAndUpdate({_id: req.params.cardId}, {$push: {users: req.params.userId}}, (err, doc) => {
+    if (err) return res.send(500, {error: err});
+    return res.send(doc);
+  })
+});
+
+router.put('/:cardId/user/remove/:userId', (req, res) => {
+  Card.findByIdAndUpdate({_id: req.params.cardId}, {$pull: {users: req.params.userId}}, (err, doc) => {
+    if (err) return res.send(500, {error: err});
+    return res.send(doc);
+  })
+});
+
 
 
 module.exports = router;

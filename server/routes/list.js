@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     .populate( {
       path: 'cards',
       populate: [
+        { path: 'users', model: 'User' },
         { path: 'labels', model: 'Label' },
         { path: 'comments', model: 'Comment',
           populate: {path: 'author', model: 'User'}

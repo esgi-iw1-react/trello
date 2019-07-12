@@ -8,6 +8,8 @@ import CardTitle from "./CardTitle";
 import CardAddBtn from "./CardAddBtn";
 import LabelSelector from "../Label/LabelSelector";
 import {Link} from "react-router-dom";
+import MemberSelector from "./MemberSelector";
+import UserAvatar from "../User/UserAvatar";
 
 const Card = ({ card, list }) => {
   
@@ -26,10 +28,14 @@ const Card = ({ card, list }) => {
             <div className="flex">
               <div className="flex flex-col justify-center mb-3 mr-6">
                 <p className="text-sm text-gray-700 mb-2">Membres</p>
-                <img src="../../../public/images/pikachu.jpeg" alt="" className="w-8 h-8"/>
+                <div className="flex justify-around">
+                  {
+                    card.users.map((user, index) => <UserAvatar key={index} username={user.username.charAt(0).toUpperCase()}/>)
+                  }
+                </div>
               </div>
               <div className="block">
-                <p className="text-sm text-gray-700 mb-2">Etiquettes</p>
+                <p className="text-sm text-gray-700 mb-2">Labels</p>
                 <div className="flex justify-around">
                   {
                     card.labels.map((label, index) => <LabelSmall key={index} name={label.name} color={label.color} />)
@@ -53,10 +59,8 @@ const Card = ({ card, list }) => {
             </div>
           </div>
           <div className="w-1/4 flex flex-col items-end">
-            <CardAddBtn name="Membres"/>
+            <CardAddBtn name="Membres"><MemberSelector card={card} list={list}/></CardAddBtn>
             <CardAddBtn name="Labels"><LabelSelector card={card} list={list}/></CardAddBtn>
-            <CardAddBtn name="CheckList"/>
-            {/*<CardAddBtn click={addLabel} card={card} name="Date Limite"/>*/}
           </div>
         </div>
       </div>
