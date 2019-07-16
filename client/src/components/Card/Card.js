@@ -30,7 +30,7 @@ const Card = ({ card, list }) => {
                 <p className="text-sm text-gray-700 mb-2">Membres</p>
                 <div className="flex justify-around">
                   {
-                    card.users.map((user, index) => <UserAvatar key={index} username={user.username.charAt(0).toUpperCase()}/>)
+                    card.users && card.users.map((user, index) => <UserAvatar key={index} username={user.username.charAt(0).toUpperCase()}/>)
                   }
                 </div>
               </div>
