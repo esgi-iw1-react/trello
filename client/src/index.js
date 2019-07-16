@@ -13,7 +13,7 @@ import Register from "./components/Auth/Register";
 ReactDOM.render(
   <CardProvider>
     <Router>
-      <PrivateRoute path="/" exact component={App}/>
+      <PrivateRoute path="/app" component={App}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/register" exact component={Register}/>
     </Router>

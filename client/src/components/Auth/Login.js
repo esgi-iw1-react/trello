@@ -16,7 +16,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     context.login(email, password)
-      .then(() => props.history.push("/"))
+      .then(() => props.history.push("/app"))
       .catch(err => setError('Mauvais login/mot de passe'))
   };
   
