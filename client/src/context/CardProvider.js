@@ -6,18 +6,18 @@ class CardProvider extends Component {
   constructor(props) {
     super(props);
     this.url = 'http://localhost:3001';
+    this.headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    };
     this.state = {
-      headers : {
-        'Content-Type': 'application/json',
-        'Authorization': ''
-      },
       lists: [],
       labels: [],
       user: {},
       users: [],
       fetchLists: () => {
-        console.log({headers: this.state.headers});
-        fetch(`${this.url}/list`, { headers: this.state.headers })
+        console.log(this.headers);
+        fetch(`${this.url}/list`, { headers: this.headers })
           .then(res => res.json())
           .then(data => {
             this.setState({
@@ -38,7 +38,7 @@ class CardProvider extends Component {
         fetch(`${this.url}/comment/${card._id}`, {
           method: 'POST',
           body: JSON.stringify(comment),
-          headers: this.state.headers
+          headers: this.headers
         })
         .then(res => res.json())
         .then(data => {
@@ -66,7 +66,7 @@ class CardProvider extends Component {
         fetch(`${this.url}/card/${card._id}`, {
           method: 'PUT',
           body: JSON.stringify({description: description}),
-          headers: this.state.headers
+          headers: this.headers
         })
         .then(res => res.json())
         .then(data => {
@@ -95,7 +95,7 @@ class CardProvider extends Component {
         fetch(`${this.url}/card/${card._id}`, {
           method: 'PUT',
           body: JSON.stringify({title: title}),
-          headers: this.state.headers
+          headers: this.headers
         })
         .then(res => res.json())
         .then(data => {
@@ -120,7 +120,7 @@ class CardProvider extends Component {
         })
       },
       addLabel: (label, card, list) => {
-        fetch(`${this.url}/card/${card._id}/label/add/${label._id}`, { method: 'PUT', headers: this.state.headers})
+        fetch(`${this.url}/card/${card._id}/label/add/${label._id}`, { method: 'PUT', headers: this.headers})
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -144,7 +144,7 @@ class CardProvider extends Component {
         });
       },
       removeLabel: (label, card, list) => {
-        fetch(`${this.url}/card/${card._id}/label/remove/${label._id}`, { method: 'PUT', headers: this.state.headers})
+        fetch(`${this.url}/card/${card._id}/label/remove/${label._id}`, { method: 'PUT', headers: this.headers})
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -171,7 +171,7 @@ class CardProvider extends Component {
         fetch(`${this.url}/label/${label._id}`, {
           method: 'PUT',
           body: JSON.stringify({name: label.name}),
-          headers: this.state.headers
+          headers: this.headers
         })
           .then(res => res.json())
           .then(data => {
@@ -201,7 +201,7 @@ class CardProvider extends Component {
           });
       },
       fetchLabels: () => {
-        fetch(`${this.url}/label`, { headers: this.state.headers })
+        fetch(`${this.url}/label`, { headers: this.headers })
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -210,7 +210,7 @@ class CardProvider extends Component {
         })
       },
       addCard: (list) => {
-        fetch(`${this.url}/card/${list._id}`, { method: 'POST', headers: this.state.headers})
+        fetch(`${this.url}/card/${list._id}`, { method: 'POST', headers: this.headers})
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -225,7 +225,7 @@ class CardProvider extends Component {
       },
       addList: (name) => {
         fetch(`${this.url}/list`,
-          { method: 'POST', body: JSON.stringify({name: name}), headers: this.state.headers
+          { method: 'POST', body: JSON.stringify({name: name}), headers: this.headers
         }).then(res => res.json())
           .then(data => {
             this.setState({
@@ -238,7 +238,7 @@ class CardProvider extends Component {
           fetch(`${this.url}/login`, {
             method: 'POST',
             body: JSON.stringify({email: email, password: password}),
-            headers: this.state.headers
+            headers: this.headers
           }).then(res => {
             if(res.status === 400){
               return reject(res.statusText);
@@ -248,8 +248,9 @@ class CardProvider extends Component {
           .then(user => {
             this.setState({
               user: user.user,
-              headers: { ...this.state.headers, Authorization: `Bearer ${user.token}` }
             });
+            this.headers.Authorization = `Bearer ${user.token}`;
+            localStorage.setItem('token', user.token);
             localStorage.setItem('user', JSON.stringify(user.user));
             return resolve();
           })
@@ -261,7 +262,7 @@ class CardProvider extends Component {
           fetch(`${this.url}/register`, {
             method: 'POST',
             body: JSON.stringify({username: username, email: email, password: password}),
-            headers: this.state.headers
+            headers: this.headers
           })
           .then(res => {
             if(res.statusCode === 400){
@@ -273,13 +274,13 @@ class CardProvider extends Component {
         })
       },
       fetchUsers: () => {
-        fetch(`${this.url}/user`, { headers: this.state.headers })
+        fetch(`${this.url}/user`, { headers: this.headers })
         .then(res => res.json())
         .then(users => this.setState({ users: users }))
         .catch(err => console.log(err));
       },
       cardAddUser: (user, card, list) => {
-        fetch(`${this.url}/card/${card._id}/user/add/${user._id}`, {method: 'PUT', headers: this.state.headers})
+        fetch(`${this.url}/card/${card._id}/user/add/${user._id}`, {method: 'PUT', headers: this.headers})
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -304,7 +305,7 @@ class CardProvider extends Component {
         .catch(err => console.log(err))
       },
       cardRemoveUser: (user, card, list) => {
-        fetch(`${this.url}/card/${card._id}/user/remove/${user._id}`, {method: 'PUT', headers: this.state.headers})
+        fetch(`${this.url}/card/${card._id}/user/remove/${user._id}`, {method: 'PUT', headers: this.headers})
         .then(res => res.json())
         .then(data => {
           this.setState({
