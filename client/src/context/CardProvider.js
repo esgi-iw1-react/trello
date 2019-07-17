@@ -16,7 +16,6 @@ class CardProvider extends Component {
       user: {},
       users: [],
       fetchLists: () => {
-        console.log(this.headers);
         fetch(`${this.url}/list`, { headers: this.headers })
           .then(res => res.json())
           .then(data => {
@@ -26,10 +25,20 @@ class CardProvider extends Component {
           })
       },
       reorder: (sourceCol, sourceIndex, destinationCol, destinationIndex) => {
+        console.log(sourceCol, sourceIndex, destinationCol, destinationIndex);
         const lists = [...this.state.lists];
         const card = lists[sourceCol].cards[sourceIndex];
         lists[sourceCol].cards.splice(sourceIndex, 1);
         lists[destinationCol].cards.splice(destinationIndex, 0, card);
+        console.log(lists);
+        lists.map(list => {
+          list.cards.map((card, index) => {
+            card.index = index;
+            return card
+          })
+        });
+        console.log(lists);
+        // debugger;
         this.setState({
           lists: lists
         });
