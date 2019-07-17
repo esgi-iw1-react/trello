@@ -12,9 +12,8 @@ router.post("/login", (req, res) => {
       const token = createToken({
         username: user.username
       });
-      user.token = token.token;
       user.password = undefined;
-      res.status(201).send( user );
+      res.status(200).send({ user, token });
     })
     .catch(error => {
       res.status(400).send("Invalid token");

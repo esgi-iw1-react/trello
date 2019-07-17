@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 app.use('/', SecurityRouter);
-// app.use(verifyToken);
+app.use(verifyToken);
 app.use('/comment', CommentRouter);
 app.use('/label', LabelRouter);
 app.use('/user', UserRouter);
