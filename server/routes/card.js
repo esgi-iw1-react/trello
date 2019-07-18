@@ -34,6 +34,25 @@ router.post('/:listId', (req, res) => {
   .catch(error => res.status(500));
 });
 
+router.put('/reorder/', (req, res) => {
+  const { lists } = req.body;
+  
+  List.findOneAndUpdate({_id: '5d2d847cf96697001c316e91'}, { cards: [] }, { upsert: true }, (err, model) => console.log(err, model));
+  for(let k in lists){
+    if(!lists.hasOwnProperty(k)){
+      return;
+    }
+    List.findOneAndUpdate({ _id: `${k}` }, { cards: [] }, { upsert: true }, (err, model) => console.log(err, model));
+    lists[k].forEach(card => {
+      console.log('cardId', card._id );
+      Card.findOneAndUpdate({_id: `${card._id}`}, { index: card.index }, {upsert: true}, (err, model) => console.log(err, model));
+      List.findOneAndUpdate({_id: `${k}`}, { $push: { cards: `${card._id}`} }, {upsert: true}, (err, model) => console.log(err, model));
+    });
+  }
+  
+  return res.send('ok');
+});
+
 router.put('/:id', (req, res) => {
   const body = req.body;
   let doc = {};

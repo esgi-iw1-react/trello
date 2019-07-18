@@ -7,7 +7,7 @@ import UserAvatar from "../User/UserAvatar";
 
 const CardPreview = ({ card, list, index }) => {
   return <>
-    <Draggable draggableId={'draggable-'+card._id} index={index}>
+    <Draggable draggableId={card._id} index={index}>
       {provided => (
         <Link to={"app/card/"+card._id}>
           <div className="cursor-pointer bg-gray-100 mb-6 shadow p-4"

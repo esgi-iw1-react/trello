@@ -1,7 +1,6 @@
 import { createContext } from "react";
 
 const CardContext = createContext({
-  headers: {},
   lists: [],
   labels: [],
   user: {},

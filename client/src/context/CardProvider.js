@@ -25,23 +25,37 @@ class CardProvider extends Component {
           })
       },
       reorder: (sourceCol, sourceIndex, destinationCol, destinationIndex) => {
-        console.log(sourceCol, sourceIndex, destinationCol, destinationIndex);
         const lists = [...this.state.lists];
         const card = lists[sourceCol].cards[sourceIndex];
         lists[sourceCol].cards.splice(sourceIndex, 1);
         lists[destinationCol].cards.splice(destinationIndex, 0, card);
-        console.log(lists);
-        lists.map(list => {
-          list.cards.map((card, index) => {
-            card.index = index;
-            return card
-          })
+        const indexedLists = lists.map(list => {
+          const id = list._id;
+          return list.cards.map((card, index) => {
+            return {_id: card._id, index: index}
+          });
         });
-        console.log(lists);
-        // debugger;
+        
+        let object = {};
+        lists.forEach(list => {
+          const listId = list._id;
+          object[listId] = list.cards.map((card, index) => {
+            return {_id: card._id, index: index}
+          });
+        });
         this.setState({
           lists: lists
         });
+        
+        fetch(`${this.url}/card/reorder`, {
+          method: 'PUT',
+          headers: this.headers,
+          body: JSON.stringify(
+            {
+              lists: object,
+            }
+          )
+        })
       },
       addComment: (comment, card, list) => {
         fetch(`${this.url}/comment/${card._id}`, {

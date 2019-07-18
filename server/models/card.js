@@ -10,6 +10,7 @@ const CardSchema = Schema({
   labels: [{ type: Schema.Types.ObjectId, ref: 'Label' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  index: Number,
 });
 
 const Card = db.model('Card', CardSchema);
