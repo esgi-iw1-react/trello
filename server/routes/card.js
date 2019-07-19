@@ -37,7 +37,6 @@ router.post('/:listId', (req, res) => {
 router.put('/reorder/', (req, res) => {
   const { lists } = req.body;
   
-  List.findOneAndUpdate({_id: '5d2d847cf96697001c316e91'}, { cards: [] }, { upsert: true }, (err, model) => console.log(err, model));
   for(let k in lists){
     if(!lists.hasOwnProperty(k)){
       return;
