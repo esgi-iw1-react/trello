@@ -29,12 +29,6 @@ class CardProvider extends Component {
         const card = lists[sourceCol].cards[sourceIndex];
         lists[sourceCol].cards.splice(sourceIndex, 1);
         lists[destinationCol].cards.splice(destinationIndex, 0, card);
-        const indexedLists = lists.map(list => {
-          const id = list._id;
-          return list.cards.map((card, index) => {
-            return {_id: card._id, index: index}
-          });
-        });
         
         let object = {};
         lists.forEach(list => {
@@ -46,7 +40,6 @@ class CardProvider extends Component {
         this.setState({
           lists: lists
         });
-        
         fetch(`${this.url}/card/reorder`, {
           method: 'PUT',
           headers: this.headers,

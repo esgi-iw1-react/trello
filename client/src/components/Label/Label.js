@@ -5,7 +5,7 @@ const Label = (props) => {
   
   const [name, setName] = useState(props.name);
   const [selected, setSelected] = useState(props.selected);
-  const [color, setColor] = useState(props.color);
+  const [color] = useState(props.color);
   const [edit, setEdit] = useState(false);
   const context = useContext(CardContext);
   
